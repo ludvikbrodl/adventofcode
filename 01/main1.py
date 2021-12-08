@@ -10,10 +10,10 @@ count = 0
 for i, value in enumerate(data):
     if i == 0 | i > len(data) - 3:
         continue
-    window0 = data[i-1] + data[i] + data[i+1]
-    window1 = data[i] + data[i+1] + data[i+2]
+    window0 = data[i - 1] + data[i] + data[i + 1]
+    window1 = data[i] + data[i + 1] + data[i + 2]
     if window0 < window1:
-        count +=1
+        count += 1
 
-    
+
 print(count)

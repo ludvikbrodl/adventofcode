@@ -10,7 +10,7 @@ count = 0
 for i, value in enumerate(data):
     if i == 0:
         continue
-    if (value > data[i-1]):
+    if value > data[i - 1]:
         count += 1
-    
+
 print(count)
