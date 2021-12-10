@@ -67,6 +67,24 @@ def get_winning_board(path):
                     return board, hit_boards[board_idx], nbr
 
 
+def get_losing_board(path):
+    nbr_seq, boards = get_data(path)
+    hit_boards = create_hit_board(boards)
+    boards_count = len(boards)
+    bingoed_boards = []
+    for nbr in nbr_seq:
+        for board_idx, board in enumerate(boards):
+            if board_idx in bingoed_boards:
+                continue
+            y, x = get_hit_coord(board, nbr)
+            if y != None:
+                hit_boards[board_idx][y][x] = 1
+                if checkForBingo(hit_boards[board_idx]):
+                    bingoed_boards.append(board_idx)
+                    if len(bingoed_boards) == boards_count:
+                        return board, hit_boards[board_idx], nbr
+
+
 def get_sum_of_non_hits(board, hitBoard):
     sum = 0
     for y, row in enumerate(hitBoard):
@@ -108,11 +126,20 @@ def part1():
 
 
 def part2_example():
-    pass
+    board, hit_board, last_nbr = get_losing_board(INPUT_EXAMPLE)
+    sum_of_non_hit = get_sum_of_non_hits(board, hit_board)
+    answer = sum_of_non_hit * int(last_nbr)
+    assert sum_of_non_hit == 148
+    assert last_nbr == "13"
+    assert answer == 1924
+    return answer
 
 
 def part2():
-    pass
+    board, hit_board, last_nbr = get_losing_board(INPUT)
+    sum_of_non_hit = get_sum_of_non_hits(board, hit_board)
+    answer = sum_of_non_hit * int(last_nbr)
+    return answer
 
 
 def main():
