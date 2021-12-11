@@ -70,11 +70,22 @@ def part1():
 
 
 def part2_example():
-    pass
+    octopuses = get_data(INPUT_EXAMPLE)
+    for step_idx in range(1, 10000):
+        octopuses: np.matrix = simulate_step(octopuses)
+        if octopuses.sum() == 0:
+            break
+    assert step_idx == 195
+    return step_idx
 
 
 def part2():
-    pass
+    octopuses = get_data(INPUT)
+    for step_idx in range(1, 10000):
+        octopuses: np.matrix = simulate_step(octopuses)
+        if octopuses.sum() == 0:
+            break
+    return step_idx
 
 
 def main():
