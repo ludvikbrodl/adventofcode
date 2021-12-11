@@ -1,6 +1,6 @@
 from collections import defaultdict
 from pathlib import Path
-import copy
+import numpy as np
 
 INPUT = "input.txt"
 INPUT_EXAMPLE = "input_example.txt"
@@ -54,12 +54,9 @@ def create_mask_matrix(x, y):
 
 # this function is extremely expensive - not sure why
 def sum_of_matrixes(arr: list[list[list[int]]]):
-    sum_matrix = create_mask_matrix(len(arr[0]), len(arr[0][0]))
+    sum_matrix = np.zeros(shape=(len(arr[0]), len(arr[0][0])))
     for matrix in arr:
-        for row_idx, row in enumerate(matrix):
-            for col_idx, val in enumerate(row):
-                if val > 0:
-                    sum_matrix[row_idx][col_idx] += 1
+        sum_matrix += np.array(matrix)
     return sum_matrix
 
 
