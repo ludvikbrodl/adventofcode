@@ -16,12 +16,32 @@ def get_data(path) -> list[int]:
     return [int(digit) for digit in get_lines(path)[0].split(",")]
 
 
+# dist: cost
+# 1: 1
+# 2: 3
+# 3: 6
+# 4: 10
+# 5: 15
+# 6: 21
+
+# cost = dist/2 * dist+1
+def calc_growing_cost(positions):
+    max_x = max(positions)
+    costs_dict: defaultdict[int, int] = defaultdict(int)
+    for x in range(max_x + 1):
+        for pos in positions:
+            dist = abs(pos - x)
+            costs_dict[x] += int(dist / 2 * (dist + 1))
+    return costs_dict
+
+
 def calc_costs(positions):
     max_x = max(positions)
     costs_dict: defaultdict[int, int] = defaultdict(int)
     for x in range(max_x + 1):
         for pos in positions:
-            costs_dict[x] += abs(pos - x)
+            dist = abs(pos - x)
+            costs_dict[x] += dist
     return costs_dict
 
 
@@ -41,11 +61,18 @@ def part1():
 
 
 def part2_example():
-    pass
+    positions = get_data(INPUT_EXAMPLE)
+    cost_dict = calc_growing_cost(positions)
+    answer = min(cost_dict.values())
+    assert 168 == answer
+    return answer
 
 
 def part2():
-    pass
+    positions = get_data(INPUT)
+    cost_dict = calc_growing_cost(positions)
+    answer = min(cost_dict.values())
+    return answer
 
 
 def main():
