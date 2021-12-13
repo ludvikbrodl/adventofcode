@@ -1,6 +1,4 @@
-from collections import defaultdict
 from pathlib import Path
-from copy import deepcopy
 
 INPUT = "input.txt"
 INPUT_EXAMPLE = "input_example.txt"
@@ -39,13 +37,14 @@ def part1_example():
 
 
 def part1():
+    return
     data = get_data(INPUT)
     answer = x(data)
-    assert answer == 1
     return answer
 
 
 def part2_example():
+    return
     data = get_data(INPUT_EXAMPLE_EZI)
     answer = x(data)
     assert answer == 1
@@ -62,9 +61,9 @@ def part2_example():
 
 
 def part2():
+    return
     data = get_data(INPUT)
     answer = x(data)
-    assert answer == 1
     return answer
 
 
