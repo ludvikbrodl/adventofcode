@@ -33,7 +33,6 @@ def calc_visible_dots(dots, fold_insts, nbr_folds=1):
     matrix = np.zeros((y_max, x_max))
     for x, y in dots:
         matrix[y][x] = 1
-    # print("nonzero", np.count_nonzero(matrix))
     for axis, nbr in fold_insts[:nbr_folds]:
         if axis == "y":
             next_matrix = matrix[:nbr, :]
