@@ -16,11 +16,13 @@ def get_data(path) -> list[int]:
     return get_lines(path)
 
 
-def x():
+def x(y):
+    return
     pass
 
 
 def part1_example():
+    return
     data = get_data(INPUT_EXAMPLE_EZI)
     answer = x(data)
     assert answer == 1
