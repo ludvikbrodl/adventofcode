@@ -17,7 +17,7 @@ def get_data(path) -> list[int]:
 
 
 def x(y):
-    return
+    return get_data(y)
     pass
 
 
@@ -39,7 +39,7 @@ def part1_example():
 
 
 def part1():
-    return
+    return x(INPUT)
     data = get_data(INPUT)
     answer = x(data)
     return answer
