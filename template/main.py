@@ -39,8 +39,8 @@ def part1_example():
 
 
 def part1():
-    return x(INPUT)
     data = get_data(INPUT)
+    return data
     answer = x(data)
     return answer
 
