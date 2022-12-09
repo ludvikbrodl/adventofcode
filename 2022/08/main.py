@@ -32,6 +32,13 @@ def check_all_indices(matrix):
     return nbr_tress
 
 
+def check_all_indices_scenic_score(matrix):
+    scores = []
+    for x, y in product(range(len(matrix)), range(len(matrix[0]))):
+        scores.append(calc_scenic_score(matrix, x, y))
+    return max(scores)
+
+
 def check_visiblity(matrix, x, y):
     if x == 0 or x == (len(matrix) - 1) or y == 0 or y == (len(matrix[0]) - 1):
         return True
@@ -51,6 +58,24 @@ def check_visiblity(matrix, x, y):
     return False
 
 
+def calc_scenic_score(matrix, x, y):
+    if x == 0 or x == (len(matrix) - 1) or y == 0 or y == (len(matrix[0]) - 1):
+        return 0
+    up = list(reversed(matrix[:y, x]))
+    down = matrix[y + 1 :, x]  # inclusive end range + 1
+    left = list(reversed(matrix[y, :x]))
+    right = matrix[y, x + 1 :]  # inclusive end range + 1
+
+    threshold = matrix[y][x]
+    distances = []
+    for sight_line in [up, down, left, right]:
+        for dist, val in enumerate(sight_line):
+            if (val >= threshold) or (dist == (len(sight_line) - 1)):
+                distances.append(dist + 1)
+                break
+    return np.prod(distances)
+
+
 def part1_example():
 
     data = get_data(INPUT_EXAMPLE)
@@ -67,26 +92,15 @@ def part1():
 
 
 def part2_example():
-    return
-    data = get_data(INPUT_EXAMPLE_EZI)
-    answer = check_all_indices(data)
-    assert answer == 1
-
-    data = get_data(INPUT_EXAMPLE_MEDIUM)
-    answer = check_all_indices(data)
-    assert answer == 2
-
     data = get_data(INPUT_EXAMPLE)
-    answer = check_all_indices(data)
-    assert answer == 3
-
+    answer = check_all_indices_scenic_score(data)
+    assert answer == 8
     return answer
 
 
 def part2():
-    return
     data = get_data(INPUT)
-    answer = check_all_indices(data)
+    answer = check_all_indices_scenic_score(data)
     return answer
 
 
