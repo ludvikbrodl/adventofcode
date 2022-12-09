@@ -130,24 +130,31 @@ REQUIRED_SIZE = 30_000_000
 
 
 def part2_example():
-    # TODO
-    return
     data = get_data(INPUT_EXAMPLE)
     root = build_tree(data)
     all_dirs = root.find_all_dirs()
     sizes = []
     for d in all_dirs:
         size = d.get_size()
-        if size <= 100_000:
-            sizes.append(size)
-    return sum(sizes)
+        sizes.append(size)
+    used_space = root.get_size()
+    for x in sorted(sizes):
+        if (FILE_SYSTEM_SIZE - used_space + x) >= REQUIRED_SIZE:
+            return x
 
 
 def part2():
-    return
     data = get_data(INPUT)
-    answer = build_tree(data)
-    return answer
+    root = build_tree(data)
+    all_dirs = root.find_all_dirs()
+    sizes = []
+    for d in all_dirs:
+        size = d.get_size()
+        sizes.append(size)
+    used_space = root.get_size()
+    for x in sorted(sizes):
+        if (FILE_SYSTEM_SIZE - used_space + x) >= REQUIRED_SIZE:
+            return x
 
 
 def main():
