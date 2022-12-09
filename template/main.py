@@ -12,13 +12,12 @@ def get_lines(path: str) -> list[str]:
     return [l.strip() for l in open(file_location, "r").readlines()]
 
 
-def get_data(path) -> list[int]:
+def get_data(path) -> list[str]:
     return get_lines(path)
 
 
 def x(y):
-    return get_data(y)
-    pass
+    return y
 
 
 def part1_example():
