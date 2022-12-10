@@ -46,9 +46,15 @@ def sum_signal_strengths(cmds):
 
 def check_cycle_and_sprite_overlap(cycle, sprite_x):
     x_pos = cycle % 40
-    if sprite_x <= x_pos <= sprite_x + 2:
-        return True
-    return False
+    if x_pos == 0:
+        # include cycle 40, 80, 120, ...
+        # there must be a smarter expression... but im tired :)
+        x_pos = 40
+    if cycle == 200:
+        pass
+    if sprite_x <= x_pos <= (sprite_x + 2):
+        return "#"
+    return "."
 
 
 def calc_crt_output(cmds):
@@ -56,21 +62,18 @@ def calc_crt_output(cmds):
     sprite_x = 1
 
     signals = []
+    signals.append(check_cycle_and_sprite_overlap(cycle, sprite_x))
     for cmd in cmds:
         cycle += 1
-        if check_cycle_and_sprite_overlap(cycle, sprite_x):
-            signals.append(sprite_x * cycle)
+        signals.append(check_cycle_and_sprite_overlap(cycle, sprite_x))
         if cmd == "noop":
             continue
         cycle += 1
         V = cmd.split(" ")[1]
         sprite_x += int(V)
-        if check_cycle_and_sprite_overlap(cycle, sprite_x):
-            signals.append(sprite_x * cycle)
-    if check_cycle_and_sprite_overlap(cycle, sprite_x):
-        signals.append(sprite_x * cycle)
-
-    return sum(signals)
+        signals.append(check_cycle_and_sprite_overlap(cycle, sprite_x))
+    signals.append(check_cycle_and_sprite_overlap(cycle, sprite_x))
+    return signals
 
 
 def part1_example():
@@ -90,26 +93,22 @@ def part1():
 
 
 def part2_example():
-    return
-    data = get_data(INPUT_EXAMPLE_EZI)
-    answer = sum_signal_strengths(data)
-    assert answer == 1
-
-    data = get_data(INPUT_EXAMPLE_MEDIUM)
-    answer = sum_signal_strengths(data)
-    assert answer == 2
-
     data = get_data(INPUT_EXAMPLE)
-    answer = sum_signal_strengths(data)
-    assert answer == 3
-
+    answer = calc_crt_output(data)
+    for i in range(len(answer)):
+        if i % 40 == 0:
+            print("")
+        print(answer[i], end="")
     return answer
 
 
 def part2():
-    return
     data = get_data(INPUT)
-    answer = sum_signal_strengths(data)
+    answer = calc_crt_output(data)
+    for i in range(len(answer)):
+        if i % 40 == 0:
+            print("")
+        print(answer[i], end="")
     return answer
 
 
