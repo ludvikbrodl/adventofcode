@@ -12,15 +12,16 @@ def get_lines(path: str) -> list[str]:
     return [l.strip() for l in open(file_location, "r").readlines()]
 
 
-def get_data(path) -> list[int]:
+def get_data(path) -> list[str]:
     return get_lines(path)
 
 
-def x():
-    pass
+def x(y):
+    return y
 
 
 def part1_example():
+    return
     data = get_data(INPUT_EXAMPLE_EZI)
     answer = x(data)
     assert answer == 1
@@ -37,8 +38,8 @@ def part1_example():
 
 
 def part1():
-    return
     data = get_data(INPUT)
+    return data
     answer = x(data)
     return answer
 
